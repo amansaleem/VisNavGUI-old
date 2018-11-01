@@ -1,6 +1,9 @@
 # VisNavGUI
+
 convertdate2time.m
+
 createClusterinfo.m
+
 filelist.txt - this file :)
 filter2D.m
 MakeSeparable.m -- SVD variation

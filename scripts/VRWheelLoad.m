@@ -11,7 +11,7 @@ function [VRdata, VRdata_o, es] = VRWheelLoad(animal, iseries, iexp, SmthTimeWin
 
 global DIRS
 global serverName server2Name server3Name
-if isempty(DIRS); SetDefaultDirs; end
+if isempty(DIRS); SetDefaultDirs2018; end
 
 VRDIRname = [DIRS.ball filesep animal filesep num2str(iseries)];
 dataDIRname = [DIRS.multichanspikes filesep animal filesep num2str(iseries)];

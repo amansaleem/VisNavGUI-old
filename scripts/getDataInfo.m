@@ -1,7 +1,8 @@
 function [dataInfo]= getDataInfo(animal)
 % AA 2010-07-22 created
 
-SetDirs;
+% SetDirs;
+SetDefaultDirs2018;
 
 % get folder names with date format
 folders = sprintf('%s%s%s',[DIRS.ball filesep],[animal filesep],'*-*-*');

@@ -1,6 +1,6 @@
 function VisNavGUI
 %path of the directories where your data are
-SetDirs;
+SetDefaultDirs2018;
 %create the main data object
 EXP = TVRData;
 

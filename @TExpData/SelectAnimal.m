@@ -2,7 +2,8 @@ function obj = SelectAnimal(obj, DIRS, strcell)
 if nargin < 3
     strcell = [];
 end
-dir_list = dir(DIRS.ball);
+%dir_list = dir(DIRS.ball);
+dir_list = dir(DIRS.animals);
 animal_list = [];
 for n = 3:length(dir_list)
     mdate(n-2) = dir_list(n).datenum;

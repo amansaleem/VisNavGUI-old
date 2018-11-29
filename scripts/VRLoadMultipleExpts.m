@@ -18,7 +18,7 @@ end
 
 switch type
     case 'BEHAV_ONLY'
-        [~, ~, es] = VRWheelLoad(animal, iseries, expt_list(1), SmthTimeWindow);
+        [~, ~, es] = VRWheelLoad_SLv2(animal, iseries, expt_list(1), SmthTimeWindow);
         if length(expt_list>1)
             for iexp = 2:length(expt_list)
                 [~, ~, esX] = VRWheelLoad(animal, iseries, expt_list(iexp));

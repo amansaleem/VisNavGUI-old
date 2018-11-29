@@ -32,7 +32,7 @@ for xx = 1:ntrajbins
     spdquantilelim(xx,1) = quantile(es.smthBallSpd(idxref & itraj == xx & es.smthBallSpd > speed_th),qlimit);
     spdquantilelim(xx,2) = quantile(es.smthBallSpd(idxref & itraj == xx & es.smthBallSpd > speed_th),1-qlimit);
 end
-if es.CircularMaze
+if isfield(es,'CircularMaze')
     spdquanttemp = repmat(spdquantilelim,[3 1]);
     spdquanttemp(:,1) = smooth(spdquanttemp(:,1),5);
     spdquanttemp(:,2) = smooth(spdquanttemp(:,2),5);

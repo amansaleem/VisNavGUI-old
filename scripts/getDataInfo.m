@@ -8,7 +8,9 @@ SetDefaultDirs2018;
 folders = sprintf('%s%s%s',[DIRS.ball filesep],[animal filesep],'*-*-*');
 
 
-animalDir = sprintf('%s%s%s',[DIRS.ball filesep],animal);
+%animalDir = sprintf('%s%s%s',[DIRS.ball filesep],animal);
+animalDir = sprintf('%s%s%s',DIRS.ball);
+
 % create a data structure that contains data file names for each day
 % number of sessions and number of trials in each session
 f = dir(animalDir);

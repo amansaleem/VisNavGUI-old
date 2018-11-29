@@ -300,7 +300,8 @@ dialog1.UpdateUIcontrol('Exp','String', num2str(EXP.exptList));
 PlotVar1DMaps.samplerate = 60;
 EXP.LoadVRData(PlotVar1DMaps.Shanknum, PlotVar1DMaps.Shanksuffix,PlotVar1DMaps.SpeedThreshold,PlotVar1DMaps.Nthetaphsbins,PlotVar1DMaps.SmthTimeWindow,PlotVar1DMaps.samplerate);
 
-EXP.data.es.series = 0*EXP.data.es.series + EXP.iseries;
+% EXP.data.es.series = 0*EXP.data.es.series + EXP.iseries;
+EXP.data.es.series = EXP.iseries;
 EXP.data.es.explist = zeros(numel(unique(EXP.data.es.series)),numel(unique(EXP.data.es.iexp)));
 
 seriesnum = unique(EXP.data.es.series);
@@ -479,8 +480,8 @@ function LoadSavedExpt_callback(hObject, eventdata, DIRS, dialog1, dialog2, dial
 %Loading callback function
 if isdir(['D:\DATA\batch' filesep EXP.animal filesep num2str(EXP.iseries) filesep 'processed'])
     dirname = ['D:\DATA\batch' filesep EXP.animal filesep num2str(EXP.iseries) filesep 'processed'];%[DIRS.multichanspikes filesep EXP.animal filesep num2str(EXP.iseries) filesep 'processed'];
-elseif isdir([DIRS.data2p filesep EXP.animal filesep num2str(EXP.iseries)])
-    dirname = [DIRS.data2p filesep EXP.animal filesep num2str(EXP.iseries)];
+% elseif isdir([DIRS.data2p filesep EXP.animal filesep num2str(EXP.iseries)])
+%     dirname = [DIRS.data2p filesep EXP.animal filesep num2str(EXP.iseries)];
 else
     error('no processed file yet');
 end
@@ -591,7 +592,8 @@ iseries = cell(nanimals,1);
 series = cell(nanimals,1);
 
 for k = 1:nanimals
-    EXP.SelectAnimal(DIRS,{'BALL','JF'});
+%     EXP.SelectAnimal(DIRS,{'BALL','JF'});
+    EXP.SelectAnimal(DIRS);
     EXP.SelectSeries('multiple');
     ianimal{k} = EXP.animal;
     iseries{k} = EXP.iseries;

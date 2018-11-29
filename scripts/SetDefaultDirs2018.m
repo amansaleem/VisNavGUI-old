@@ -14,18 +14,33 @@ switch hostName
     case 'saleem01'
         serverName = 'S:\';
     case 'saleem11'
-        serverName = 'Z:\';
+        %serverName = 'Z:\';
+        serverName = 'Z:\Data\NewFileServer\Data\Subjects'; % temporary testing of new server format
 end
 
-DIRS.ball           = fullfile(serverName,'Data','Behav'); % This is where the VR data is
-DIRS.multichanspikes= fullfile(serverName,'Data','ePhys'); % This is where the kwikFiles, photodiode (VR processed files are)
-DIRS.data           = fullfile(serverName,'Data','processed'); % This is where all the processed files are. Also where the p-files are stored
+if strcmp(hostName,'saleem11')
+    
+    animal= {'M180910_MMc_sms'};
+    iseries={'1030'};
+    iexp={''};
+    suffix='V1';
+    
+    DIRS.ball           = fullfile(serverName,animal{1},'ePhys',iseries{1}); % This is where the VR data is
+    DIRS.multichanspikes= fullfile(serverName,animal{1},'VRBehaviour'); % This is where the kwikFiles, photodiode (VR processed files are)
+    DIRS.data           = fullfile(serverName,animal{1},'BonsaiLog'); % This is where all the processed files are. Also where the p-files are stored
 
-DIRS.xfiles         = fullfile(serverName,'Code','SLVS','xfiles'); % stimulus running files.
+else
+    DIRS.ball           = fullfile(serverName,'Data','Behav'); % This is where the VR data is
+    DIRS.multichanspikes= fullfile(serverName,'Data','ePhys'); % This is where the kwikFiles, photodiode (VR processed files are)
+    DIRS.data           = fullfile(serverName,'Data','processed'); % This is where all the processed files are. Also where the p-files are stored
 
-DIRS.stimInfo       = fullfile(serverName,'Data','stimInfo'); % Not really necessary
-DIRS.spikes         = fullfile(serverName,'Data','Spikes'); % seems redundant
-DIRS.expInfo        = fullfile(serverName,'Data','expInfo');
+    DIRS.xfiles         = fullfile(serverName,'Code','SLVS','xfiles'); % stimulus running files.
+
+    DIRS.stimInfo       = fullfile(serverName,'Data','stimInfo'); % Not really necessary
+    DIRS.spikes         = fullfile(serverName,'Data','Spikes'); % seems redundant
+    DIRS.expInfo        = fullfile(serverName,'Data','expInfo');
+
+end
 
 % DIRS.camera         = fullfile(serverName,'Data','Intrinsic');
 % DIRS.Intrinsic      = fullfile(serverName,'Data','Intrinsic'); % Piperico changed to zserver

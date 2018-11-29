@@ -241,7 +241,8 @@ PlotVar1DMaps = UpdateplotBehavSpks(PlotVar1DMaps,EXP,Layout);
 end
 
 function SelectAnimal_callback(hObject, eventdata, DIRS, dialog, EXP)
-EXP.SelectAnimal(DIRS,{'BALL','JF','MIK'});
+% EXP.SelectAnimal(DIRS,{'BALL','JF','MIK'});
+EXP.SelectAnimal(DIRS);
 dialog.UpdateUIcontrol('Animal','String', EXP.animal);
 end
 

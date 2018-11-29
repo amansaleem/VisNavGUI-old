@@ -1,5 +1,6 @@
 function obj = LoadVRData(obj, shank_list, suffix, speed_th, nthetaphsbins, SmthTimeWindow, samplerate)
-SetDirs;
+% SetDirs;
+SetDefaultDirs2018
 if nargin < 2
     shank_list = [];
     suffix = [];

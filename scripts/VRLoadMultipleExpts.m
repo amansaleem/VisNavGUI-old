@@ -21,7 +21,7 @@ switch type
         [~, ~, es] = VRWheelLoad_SLv2(animal, iseries, expt_list(1), SmthTimeWindow);
         if length(expt_list>1)
             for iexp = 2:length(expt_list)
-                [~, ~, esX] = VRWheelLoad(animal, iseries, expt_list(iexp));
+                [~, ~, esX] = VRWheelLoad_SLv2(animal, iseries, expt_list(iexp));
                 es = combineTwoVRexpts(es, esX);
             end
         end
@@ -41,9 +41,9 @@ switch type
         es = [];
         for iexp = 1:length(expt_list)
             if isempty(es)
-                es = getVRspikes(animal,iseries,expt_list(iexp),100,0,1,0,igroup,iaddinfo,0,SmthTimeWindow,samplerate);
+                es = getVRspikes_SL(animal,iseries,expt_list(iexp),100,0,1,0,igroup,iaddinfo,0,SmthTimeWindow,samplerate);
             else
-                esX = getVRspikes(animal,iseries,expt_list(iexp),100,0,1,0,igroup,iaddinfo,0,SmthTimeWindow,samplerate);
+                esX = getVRspikes_SL(animal,iseries,expt_list(iexp),100,0,1,0,igroup,iaddinfo,0,SmthTimeWindow,samplerate);
                 es = combineTwoVRexpts(es, esX);
             end
         end

@@ -24,7 +24,7 @@ obj.SmthTimeWindow = SmthTimeWindow;
 %     obj.data.ephys = false;
 %     obj.data.twophoton = true;
 % elseif isdir([DIRS.multichanspikes filesep obj.animal filesep num2str(obj.iseries)])
-if isdir([DIRS.multichanspikes filesep obj.animal filesep num2str(obj.iseries)])
+if isdir([DIRS.multichanspikes filesep num2str(obj.iseries)])
     obj.data.es = VRLoadMultipleExpts(obj.animal, obj.iseries, obj.exptList, 'SPIKES', shank_list, suffix, SmthTimeWindow, samplerate);
     obj.data.ephys = true;
     obj.data.twophoton = false;

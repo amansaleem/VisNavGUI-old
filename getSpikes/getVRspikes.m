@@ -6,7 +6,8 @@ function [es, spikeRate, VRdata, VRdata_o, chans, spontRate, spikeTimes] = ...
 global DIRS
 global THRES
 
-SetDirs
+% SetDirs
+SetDefaultDirs2018
 
 if nargin<5
     flag_load = 1;
@@ -50,8 +51,9 @@ end
 
 
 fname = [animal '_' num2str(iseries) '_' num2str(iexp)];
-dDIRname = [DIRS.multichanspikes filesep animal filesep num2str(iseries)];
-dDIRname2 = [DIRS.data2 filesep animal filesep num2str(iseries)];
+%dDIRname = [DIRS.multichanspikes filesep animal filesep num2str(iseries)];
+dDIRname = [DIRS.multichanspikes filesep num2str(iseries)];
+%dDIRname2 = [DIRS.data2 filesep animal filesep num2str(iseries)];
 
 if flag_load
     if exist([dDIRname filesep fname '_contspikes' '.mat'],'file')

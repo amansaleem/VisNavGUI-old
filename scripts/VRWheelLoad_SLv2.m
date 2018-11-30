@@ -10,7 +10,7 @@ function [VRdata, VRdata_o, es] = VRWheelLoad_SLv2(animal, iseries, iexp, diffTh
 % 09/15: JUL (change relative to the max number of trials)
 
 global DIRS
-global serverName server2Name server3Name
+% global serverName server2Name server3Name
 
 % try
 %     [~,b] = system('hostname');
@@ -178,6 +178,7 @@ end
 
 if nargout>2
     es = VREvenSample_SL(VRdata); % temp. fix 2018-11 MM
+    es.CircularMaze = 0;
     es.iexp = zeros(size(es.sampleTimes));
     es.iexp(:) = iexp;
     es.rewardTolerance = VRdata.EXP.rew_tol;

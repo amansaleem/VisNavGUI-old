@@ -21,13 +21,13 @@ end
 if strcmp(hostName,'saleem11')
     
     animal= 'M180910_MMc_sms';
-    iseries='1030';
-    iexp='';
-    suffix='V1';
+    %iseries='1030';
+    %iexp='';
+    %suffix='V1';
     
     DIRS.animals        = serverName;
     DIRS.ball           = fullfile(serverName,animal,'VRBehaviour'); % This is where the VR data is
-    DIRS.multichanspikes= fullfile(serverName,animal,'ePhys',iseries); % This is where the kwikFiles, photodiode (VR processed files are)
+    DIRS.multichanspikes= fullfile(serverName,animal,'ePhys'); % This is where the kwikFiles, photodiode (VR processed files are)
     DIRS.data           = fullfile(serverName,animal,'BonsaiLog'); % This is where all the processed files are. Also where the p-files are stored
 
 else

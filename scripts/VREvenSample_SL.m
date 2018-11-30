@@ -61,6 +61,7 @@ SyncPulse = SyncPulse(es.sortIDX);
 trialIdx(find(trialIdx==0))= max(trialIdx(find(trialIdx==0)-1),trialIdx(find(trialIdx==0)-2));
 
 es.sampleRate = '60 Hz';
+es.sampleSize = 60;
 es.sampleTimes = evenSampleTime';
 
 lickTimes = es.screenTimes(lick>0);

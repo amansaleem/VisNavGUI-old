@@ -107,14 +107,23 @@ end
 if isfield(es1, 'completetrial')
     es.completetrial = [es1.completetrial' es2.completetrial']';
 end
-
-
+% SL experiments do not have eye tracking now (2018-11 MM)
+if isfield(es1, 'eyeXpos')
 es.eyeXpos = [es1.eyeXpos' es2.eyeXpos']';
+end
+if isfield(es1, 'eyeYpos')
 es.eyeYpos = [es1.eyeYpos' es2.eyeYpos']';
+end
+if isfield(es1, 'pupilSize')
 es.pupilSize = [es1.pupilSize' es2.pupilSize']';
+end
 
 es.iexp = [es1.iexp' es2.iexp']';
+
+if isfield(es1, 'series') % don't know what this is for (2018-11 MM)
 es.series = [es1.series' es2.series']';
+end
+
 if isfield(es, 'spikeTrain')
     es.spikeTrain = [es1.spikeTrain' es2.spikeTrain']';
     es.mua = [es1.mua' es2.mua']';

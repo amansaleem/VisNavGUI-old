@@ -374,21 +374,21 @@ if EXP.data.ephys || EXP.data.twophoton
         EXP.CalculateStimTuning([], PlotVar1DMaps.Shanknum, PlotVar1DMaps.Shanksuffix);
         delay = 0;
         Xbinsize = 1;
-        tic
+%         tic
         EXP.Calculate1Dmaps('trajPercent', PlotVar1DMaps.SmthTimeWindow, Xbinsize, PlotVar1DMaps.SmthSpatialWindow,delay, EXP.data.es.CircularMaze);
-        toc
+%         toc
 %         Spdbinsize = 0.1;
 %         SmthSpdWindow = 0.1;
 %         EXP.Calculate2Dmaps('trajPercent', 'smthBallSpd', PlotVar1DMaps.SmthTimeWindow, Xbinsize, Spdbinsize, PlotVar1DMaps.SmthSpatialWindow, SmthSpdWindow,delay, EXP.data.es.CircularMaze, false);
         if isfield(EXP.data.es,'LFPphase2')
             Phsbinsize = 20;
             SmthPhsWindow = 40;
-            tic
+%             tic
             EXP.Calculate1Dmaps('LFPphase2', PlotVar1DMaps.SmthTimeWindow, Phsbinsize, SmthPhsWindow,delay, true);
-            toc
-            tic
+%             toc
+%             tic
             EXP.Calculate2Dmaps('trajPercent', 'LFPphase2', PlotVar1DMaps.SmthTimeWindow, Xbinsize, Phsbinsize, PlotVar1DMaps.SmthSpatialWindow, SmthPhsWindow,delay, EXP.data.es.CircularMaze, true);
-            toc
+%             toc
         end
         EXP.defineCellProp(Nperm_cellprop);
     end

@@ -13,12 +13,12 @@ switch hostName
         serverName = 'Y:\';
     case 'saleem01'
         serverName = 'S:\';
-    case 'saleem11'
+    case 'saleem08'%'saleem11'
         %serverName = 'Z:\';
-        serverName = 'Z:\Data\NewFileServer\Data\Subjects'; % temporary testing of new server format
+        serverName = 'S:\Data\NewFileServer\Data\Subjects'; % temporary testing of new server format
 end
 
-if strcmp(hostName,'saleem11')
+if strcmp(hostName,'saleem08')
     
     animal= 'M180910_MMc_sms';
     %iseries='1030';

@@ -88,7 +88,7 @@ for c = 1:size(PlotVar.ChosenContrast,2)
                                 varX = es.(PlotVar.ChosenVarX{1})(:);%smthInTime(es.(PlotVar.ChosenVarX{1})(:), 60, 150, 'same', [], 'boxcar_centered');
                                 varX = normalise1var(varX,100,[],[0 100]);
                                 dx = 1;
-                                samplerate = 1./es.sampleSize(tidx);%60;
+                                samplerate = 1./es.sampleSize;%60;
                                 nbXbinsmth = round(1/(4/100));%round(1/(PlotVar.Xbinsize/100));
                                 spktrain(~isnan(spktrain)) = smthInTime(spktrain(~isnan(spktrain)), mean(samplerate), 15, 'same', [], 'boxcar_centered');
                                 
@@ -435,7 +435,7 @@ for c = 1:size(PlotVar.ChosenContrast,2)
                                 end
                             case 'POTH2'%'X x Speed map'
                                 dx = PlotVar.Xbinsize;
-                                samplerate = 1./es.sampleSize(tidx);%60;
+                                samplerate = 1./es.sampleSize;%60;
                                 nbXbinsmth = round(1/(PlotVar.Xbinsize/100));
                                 spktrain = es.spikeTrain(:,icell);
                                 ndT = 100;

@@ -199,13 +199,12 @@ if run_rest == 1
 %     x_g = linspace(-Width/2, Width/2, Width);
 %     gaussFilter = exp(-x_g.^2/(2*sigma^2));
 %     gaussFilter_ = gaussFilter / sum (gaussFilter); % normalize
-
-    sampleTimesedges = [TempES.sampleTimes;TempES.sampleTimes(end)+TempES.sampleTimes(end)-TempES.sampleTimes(end-1)];
+    
     for gc = 1:length(TempChans)
         TimeStamps = TempChans(gc).spiketimes;
-        ifr = histcounts(TimeStamps,sampleTimesedges)/(max(TempES.sampleTimes)/length(TempES.sampleTimes));
+        ifr = histcounts(TimeStamps,TempES.sampleTimes)/(max(TempES.sampleTimes)/length(TempES.sampleTimes));
         TempChans(gc).FiringRate = ifr';
-        TempES.spikeTrain(:,gc) = ifr(:);
+        TempES.spikeTrain(:,gc) = ifr;
         TempES.spikeIDs{gc} = chans(gc).id;
         TempES.chanIDs{gc} = chans(gc).ichan;
         TempES.ProbeIDs{gc} = 1;

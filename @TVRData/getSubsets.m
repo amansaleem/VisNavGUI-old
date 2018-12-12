@@ -40,7 +40,7 @@ else
     tidx = false(size(obj.data.es.smthBallSpd));
 end
 
-tidx = tidx & obj.data.es.smthBallSpd > speed_th & ~isnan(obj.data.es.smthBallSpd) & ~isnan(obj.data.es.smthTrajSpd);
+tidx = tidx & obj.data.es.smthBallSpd > speed_th & ~isnan(obj.data.es.smthBallSpd);% & ~isnan(obj.data.es.smthTrajSpd);
 
 if FnoBlanks && isfield(obj.data.es,'blanks')
     tidx = tidx & obj.Subset.noBlanks;%~(obj.data.es.blanks) & ~(obj.data.es.afterblanks);

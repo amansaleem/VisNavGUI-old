@@ -276,7 +276,7 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                             end
                         end
                         
-                        [SInfo, SInfoperSpk, map] = SpatialInformation(obj.data.es.trajPercent(tidx), spktrain(:,:), dx, samplerate,nbXbinsmth,obj.data.es.CircularMaze);
+                        [SInfo, SInfoperSpk, map] = SpatialInformation(obj.data.es.trajPercent(tidx), spktrain(:,:), dx, samplerate(tidx),nbXbinsmth,obj.data.es.CircularMaze);
                         SSI = (max(map) - mean(map))/mean(map);
                         map = map(:)';
                         if ~isempty(map)
@@ -310,7 +310,7 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                         try
                             if icell <= numel(obj.CellInfo.trajdecCell_Xave)
                                 if ~isempty(obj.CellInfo.trajdecCell_Xave{icell})
-                                    [SInfo_dec, SInfoperSpk_dec, map_dec] = SpatialInformation(obj.CellInfo.trajdecCell_Xave{icell}(tidx)-1, spktrain(:,:), dx, samplerate,nbXbinsmth,obj.data.es.CircularMaze);
+                                    [SInfo_dec, SInfoperSpk_dec, map_dec] = SpatialInformation(obj.CellInfo.trajdecCell_Xave{icell}(tidx)-1, spktrain(:,:), dx, samplerate(tidx),nbXbinsmth,obj.data.es.CircularMaze);
                                     SSI_dec = (max(map_dec) - mean(map_dec))/mean(map_dec);
                                     map_dec = map_dec(:)';
                                     if ~isempty(map_dec)
@@ -376,7 +376,7 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                     if c == cbase && g == gbase && r == rbase && o == obase
                         %normaveform = (waveform)./repmat(max(abs(waveform),[],1),[size(waveform,1) 1]);
                         Spkwfcenter = floor(size(obj.CellInfo.waveform,2)/2);
-%                         obj.CellInfo.min2maxSpkwf(icell) = (Spkwfcenter+find(obj.CellInfo.waveform(icell,(Spkwfcenter+1):end)==max(obj.CellInfo.waveform(icell,(Spkwfcenter+1):end)),1,'first'))-find(obj.CellInfo.waveform(icell,:)==min(obj.CellInfo.waveform(icell,:)),1,'first');
+                        obj.CellInfo.min2maxSpkwf(icell) = (Spkwfcenter+find(obj.CellInfo.waveform(icell,(Spkwfcenter+1):end)==max(obj.CellInfo.waveform(icell,(Spkwfcenter+1):end)),1,'first'))-find(obj.CellInfo.waveform(icell,:)==min(obj.CellInfo.waveform(icell,:)),1,'first');
                         
                         spkautocorr = 60*xcorr(obj.data.es.spikeTrain(:,icell),60,'coeff');
                         spkautocorr = spkautocorr(62:end);
@@ -384,13 +384,9 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                         obj.CellInfo.burstindex(icell) = max(spkautocorr(1:3))/max(spkautocorr(6:end));
                         obj.CellInfo.rateautocorr(icell) = nanmean(spkautocorr(end-5:end));
                         
-                        [minFRmapbase,~] = fast1Dmap(obj.data.es.trajPercent(tidx), obj.data.es.spikeTrain(idx,icell), dx, samplerate, nbXbinsmth, obj.data.es.CircularMaze);
+                        [minFRmapbase,~] = fast1Dmap(obj.data.es.trajPercent(tidx), obj.data.es.spikeTrain(idx,icell), dx, samplerate(tidx), nbXbinsmth, obj.data.es.CircularMaze);
                         minFR = min(minFRmapbase);
-                        try
                         obj.CellInfo.minFR(icell) = minFR;
-                        catch
-                            keyboard
-                        end
                         if ~isempty(minFRmapbase)
                             obj.CellInfo.Spatialmodulation(icell) = (max(minFRmapbase) - mean(minFRmapbase))/mean(minFRmapbase);
                         else
@@ -421,7 +417,7 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                         obj.CellInfo.fieldXcorr{c, g, r, o}(icell,:) = xcorr(repmat(map-mean(map),[1 3]),repmat(mapbase-mean(mapbase),[1 3]),50,'coeff');
                         [~,imax] = max(map);
                         obj.CellInfo.fieldZ{c, g, r, o}(icell) = (map(imax) - mean(map))./mapSE(imax);
-                        obj.CellInfo.rate{c, g, r, o}(icell) = (sum(obj.data.es.spikeTrain(tidx,icell))/sum(tidx))*mean(samplerate);
+                        obj.CellInfo.rate{c, g, r, o}(icell) = (sum(obj.data.es.spikeTrain(tidx,icell))/sum(tidx))*mean(samplerate(tidx));
                         obj.CellInfo.fieldMax{c, g, r, o}(icell) = max(map);
                         obj.CellInfo.fieldMin{c, g, r, o}(icell) = min(map);
                     else
@@ -860,9 +856,9 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                         zphsfield_th = 0;
                         wfphsfield_th = 0;
                         for iprobe = 1:2
-                            phscellidx = obj.CellInfo.Goodcluster & obj.CellInfo.Probe==iprobe & ~obj.CellInfo.Finterneuron;% & obj.CellInfo.min2maxSpkwf > wfphsfield_th;%& obj.CellInfo.phsfieldZ{c, g, r, o}>=zphsfield_th 
+                            phscellidx = obj.CellInfo.Goodcluster & obj.CellInfo.Probe==iprobe & ~obj.CellInfo.Finterneuron & obj.CellInfo.min2maxSpkwf > wfphsfield_th;%& obj.CellInfo.phsfieldZ{c, g, r, o}>=zphsfield_th 
                             
-                            [phsmapall,~,~,phsmapSEall] = fast1Dmap(obj.data.es.LFPphase(tidx), sum(obj.data.es.spikeTrain(idx,phscellidx),2), 20, samplerate,(360/20)/2,true);
+                            [phsmapall,~,~,phsmapSEall] = fast1Dmap(obj.data.es.LFPphase(tidx), sum(obj.data.es.spikeTrain(idx,phscellidx),2), 20, samplerate(tidx),(360/20)/2,true);
                             obj.CellInfo.phsfieldMUA{iprobe} = phsmapall;
                             obj.CellInfo.phsfieldMUASE{iprobe} = phsmapSEall;
                             [~,imax] = max(phsmapall);
@@ -873,7 +869,7 @@ for c = 1:numel(obj.SubsetVal.contrast) +1
                             phsgoodcells = find(phscellidx);
                             phsmapcell = NaN(numel(phsgoodcells),numel(phsmapall));
                             for icell = 1:numel(phsgoodcells)
-                                [phsmapcell(icell,:),~,~,~] = fast1Dmap(obj.data.es.LFPphase(tidx), obj.data.es.spikeTrain(idx,phsgoodcells(icell)), 20, samplerate,(360/20)/2,true);
+                                [phsmapcell(icell,:),~,~,~] = fast1Dmap(obj.data.es.LFPphase(tidx), obj.data.es.spikeTrain(idx,phsgoodcells(icell)), 20, samplerate(tidx),(360/20)/2,true);
                             end
                             obj.CellInfo.phsfieldMUAnorm{iprobe} = nanmean(phsmapcell./repmat(nanmean(phsmapcell,2),[1 size(phsmapcell,2)]),1);
                             obj.CellInfo.phsfieldPosMUAnorm{iprobe} = getCircularAverage(obj.CellInfo.phsfieldMUAnorm{iprobe}(:),0,0.01,0.05);

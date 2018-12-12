@@ -48,14 +48,14 @@ for icell = 1:obj.CellInfo.NumCells
             obj.CellInfo.Unsortedcluster(icell) = true;
         end
     end
-    if strcmp(probeIDs{icell},'CA1') || strcmp(probeIDs{icell},'1')
+    if strcmp(probeIDs{icell},'CA1') || probeIDs{icell} == 1
         obj.CellInfo.Probe(icell) = 1;
     end
-    if strcmp(probeIDs{icell},'V1') || strcmp(probeIDs{icell},'2')
+    if strcmp(probeIDs{icell},'V1') || probeIDs{icell} == 2
         obj.CellInfo.Probe(icell) = 2;
     end
 %     obj.CellInfo.CellListString{icell} = num2str(icell);
-    if strcmp(probeIDs{icell},'CA1') || strcmp(probeIDs{icell},'1')
+    if strcmp(probeIDs{icell},'CA1') || probeIDs{icell} == 1
         obj.CellInfo.CellListString{icell} = [num2str(icell) ': tet#' num2str(obj.CellInfo.Shank(icell)) '_' str(stridx:end)] ; 
     else
         obj.CellInfo.CellListString{icell} = [num2str(icell) ': V1_' str(stridx:end)] ; 

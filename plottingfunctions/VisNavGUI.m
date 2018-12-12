@@ -392,6 +392,9 @@ if EXP.data.ephys || EXP.data.twophoton
             EXP.Calculate2Dmaps('trajPercent', 'LFPphase2', PlotVar1DMaps.SmthTimeWindow, Xbinsize, Phsbinsize, PlotVar1DMaps.SmthSpatialWindow, SmthPhsWindow,delay, EXP.data.es.CircularMaze, true);
             toc
         end
+        
+        %temporary fix: smthBallSpd is empty at this point
+        EXP.data.es.smthBallSpd = EXP.data.es.ballspeed;
         EXP.defineCellProp(Nperm_cellprop);
     end
 %     if ~(exist(savedcellinfo) && exist(savedmaps1d) && exist(savedVS))

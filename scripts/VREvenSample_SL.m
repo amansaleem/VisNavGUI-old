@@ -1,4 +1,4 @@
-function es = VREvenSample(VRdata, sampleTimes, screenTimes)
+function es = VREvenSample_SL(VRdata, sampleTimes, screenTimes)
 
 
 [es.screenTimes2 es.sortIDX] = sort(VRdata.TRIAL.time(:));
